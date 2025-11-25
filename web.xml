@@ -1,0 +1,23 @@
+<web-app ... version="4.0">
+  <servlet>
+    <servlet-name>HospitalServlet</servlet-name>
+    <servlet-class>hospital.HospitalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HospitalServlet</servlet-name>
+    <url-pattern>/hospital</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DoctorServlet</servlet-name>
+    <servlet-class>hospital.DoctorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoctorServlet</servlet-name>
+    <url-pattern>/doctor</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>addRecord.html</welcome-file>
+  </welcome-file-list>
+</web-app>

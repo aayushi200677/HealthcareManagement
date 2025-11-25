@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Record</title>
+</head>
+<body>
+    <h2>Add New User</h2>
+    <form action="hospital" method="post">
+        <label>Name:</label>
+        <input type="text" name="name" required><br>
+        <label>Age:</label>
+        <input type="number" name="age" min="1" required><br>
+        <label>City:</label>
+        <input type="text" name="city" required><br>
+        <input type="hidden" name="type" value="user">
+        <button type="submit">Add User</button>
+    </form>
+    <hr>
+    <h2>Add New Doctor</h2>
+    <form action="doctor" method="post">
+        <label>Name:</label>
+        <input type="text" name="docname" required><br>
+        <label>Specialization:</label>
+        <input type="text" name="specialization" required><br>
+        <label>Experience (years):</label>
+        <input type="number" name="experience" min="0" required><br>
+        <input type="hidden" name="type" value="doctor">
+        <button type="submit">Add Doctor</button>
+    </form>
+</body>
+</html>
