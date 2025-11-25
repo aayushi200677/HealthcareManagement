@@ -1,4 +1,4 @@
-🏥 Online Hospital Management System (Console-Based)
+🏥 Online Healthcare(Hospital) Management System (Console-Based)
 
 A Java-based console application that manages core hospital operations such as patient records, doctor details, appointments, billing, and database storage.
 This project follows the Model–View–Controller (MVC) architecture and uses JDBC + MySQL for persistent data storage.
