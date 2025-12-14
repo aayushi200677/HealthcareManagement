@@ -1,55 +1,173 @@
-🏥 Online Healthcare(Hospital) Management System (Console-Based)
+🏥 Healthcare Management System (Java Web)
+A Java web-based Healthcare Management System built using Servlets + JDBC + MySQL.
+It manages patients (users) and doctors with proper validation, DAO-layer code quality, and small dashboard‑style features suited for academic evaluation.
 
-A Java-based console application that manages core hospital operations such as patient records, doctor details, appointments, billing, and database storage.
-This project follows the Model–View–Controller (MVC) architecture and uses JDBC + MySQL for persistent data storage.
+🧰 Tech Stack
+☕ Java (Servlets, JDBC)
 
-⭐ Features
-🔹 Patient Management
+🌐 HTML5, CSS, JavaScript
 
-Add, view, update, delete patient details
+🗄️ MySQL
 
-Store contact, age, disease, and assigned doctor
+🚀 Apache Tomcat
 
-🔹 Doctor Management
+🧩 VS Code / Eclipse as IDE
 
-Add & view doctor details
+✨ Features
+🔹 Core Functionality
+👤 Patient (User) Management
 
-Specialization-wise doctor filtering
+Add user with Name, Age, City
 
-🔹 Appointment Management
+View all users in a table
 
-Book appointments
+🩺 Doctor Management
 
-View upcoming appointments
+Add doctor with Name, Specialization, Experience (years)
 
-Check doctor availability
+View all doctors in a table
 
-🔹 Billing System
+🧱 DAO Layer
 
-Auto-calculate total bill
+UserDao / UserDaoImpl for user CRUD
 
-Add charges for consultation, tests, rooms
+DoctorDao / DoctorDaoImpl for doctor CRUD
 
-🔹 Authentication
+All DB operations via PreparedStatement for safety and maintainability
 
-Admin login
+🌟 Innovative / Extra Features
+🔍 Doctor search by specialization on the doctor listing page
 
-Secure input validation
+📊 Summary counts:
 
-Exception handling for wrong inputs
+Total number of users
 
-🔹 Database Support (MySQL + JDBC)
+Total number of doctors
 
-Persistent data storage
+🛡️ Client‑side + server‑side validation:
 
-All CRUD operations supported
+HTML5 required, min, max
 
-Proper JDBC connection handling
+JavaScript checks
 
-🏗️ Tech Stack
-Layer	Technology
-Language	Java (Core Java, OOP, Collections, Exception Handling)
-Database	MySQL
-Connectivity	JDBC
-Architecture	MVC (Model–View–Controller)
-IDE Used	IntelliJ / Eclipse / VS Code (any)
+Server code checks ranges and catches invalid numbers
+
+🗂️ Project Structure
+text
+src/
+  main/
+    java/
+      hospital/
+        HospitalServlet.java      // User (patient) servlet
+        DoctorServlet.java        // Doctor servlet + search
+        User.java
+        UserDao.java
+        UserDaoImpl.java
+        Doctor.java
+        DoctorDao.java
+        DoctorDaoImpl.java
+        DatabaseUtil.java
+    webapp/
+      addRecord.html
+      WEB-INF/
+        web.xml
+
+lib/
+  servlet-api.jar
+  mysql-connector-*.jar
+HospitalServlet → /hospital : add + list users
+
+DoctorServlet → /doctor : add + list + search doctors
+
+DatabaseUtil → central JDBC connection helper
+
+🛢️ Database Setup (MySQL)
+sql
+CREATE DATABASE hospital;
+USE hospital;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    city VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE doctors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100) NOT NULL,
+    experience INT NOT NULL
+);
+Update credentials in DatabaseUtil.java:
+
+java
+private static final String URL = "jdbc:mysql://localhost:3306/hospital";
+private static final String USER = "root";
+private static final String PASSWORD = "your_password";
+🌍 Web Configuration
+📄 web.xml
+xml
+<web-app ... version="4.0">
+    <servlet>
+        <servlet-name>HospitalServlet</servlet-name>
+        <servlet-class>hospital.HospitalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HospitalServlet</servlet-name>
+        <url-pattern>/hospital</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DoctorServlet</servlet-name>
+        <servlet-class>hospital.DoctorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DoctorServlet</servlet-name>
+        <url-pattern>/doctor</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>addRecord.html</welcome-file>
+    </welcome-file-list>
+</web-app>
+📝 addRecord.html
+Form to add user (POST → /hospital)
+
+Form to add doctor (POST → /doctor)
+
+JavaScript for extra client‑side validation
+
+Links to View All Users and View All Doctors
+
+✅ Validation & Robustness
+💻 Client‑Side
+HTML5:
+
+required on all inputs
+
+min / max on age and experience
+
+JavaScript:
+
+Non‑empty checks for name, city, specialization
+
+Age must be 1–120
+
+Experience must be ≥ 0
+
+🧮 Server‑Side
+Trims and validates all parameters in servlets
+
+Uses try / catch for Integer.parseInt to avoid crashes
+
+Shows clear error messages if validation fails
+
+Inserts into DB only when data is valid
+
+🗄️ Data Access Layer
+DAO classes encapsulate SQL logic
+
+All queries use PreparedStatement
+
+Easier to maintain and test, follows standard Java DAO pattern
