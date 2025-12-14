@@ -1,31 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add Record</title>
+    <meta charset="UTF-8">
+    <title>Hospital Management - Add Records</title>
+    <script>
+        // Client-side validation for extra robustness
+        function validateUserForm() {
+            const form = document.forms["userForm"];
+            const name = form["name"].value.trim();
+            const age = form["age"].value;
+            const city = form["city"].value.trim();
+
+            if (!name || !city) {
+                alert("Name and City cannot be blank.");
+                return false;
+            }
+            if (age <= 0 || age > 120) {
+                alert("Age must be between 1 and 120.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateDoctorForm() {
+            const form = document.forms["doctorForm"];
+            const name = form["docname"].value.trim();
+            const spec = form["specialization"].value.trim();
+            const exp = form["experience"].value;
+
+            if (!name || !spec) {
+                alert("Doctor name and specialization cannot be blank.");
+                return false;
+            }
+            if (exp < 0) {
+                alert("Experience cannot be negative.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
-    <h2>Add New User</h2>
-    <form action="hospital" method="post">
+    <h1>Hospital Management System</h1>
+
+    <h2>Add New User (Patient)</h2>
+    <form name="userForm" action="hospital" method="post" onsubmit="return validateUserForm();">
         <label>Name:</label>
         <input type="text" name="name" required><br>
+
         <label>Age:</label>
-        <input type="number" name="age" min="1" required><br>
+        <input type="number" name="age" min="1" max="120" required><br>
+
         <label>City:</label>
         <input type="text" name="city" required><br>
+
         <input type="hidden" name="type" value="user">
         <button type="submit">Add User</button>
     </form>
+
+    <p>
+        <a href="hospital">View All Users</a>
+    </p>
+
     <hr>
+
     <h2>Add New Doctor</h2>
-    <form action="doctor" method="post">
+    <form name="doctorForm" action="doctor" method="post" onsubmit="return validateDoctorForm();">
         <label>Name:</label>
         <input type="text" name="docname" required><br>
+
         <label>Specialization:</label>
         <input type="text" name="specialization" required><br>
+
         <label>Experience (years):</label>
         <input type="number" name="experience" min="0" required><br>
+
         <input type="hidden" name="type" value="doctor">
         <button type="submit">Add Doctor</button>
     </form>
+
+    <p>
+        <a href="doctor">View All Doctors</a>
+    </p>
 </body>
 </html>
+
+
